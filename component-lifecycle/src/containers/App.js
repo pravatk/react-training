@@ -1,36 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import classes from './App.css';
-import Persons from '../components/Persons/Persons';
-import Cockpit from '../components/Cockpit/Cockpit';
+import classes from "./App.module.css";
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log('[App.js] constructor');
+    console.log("[App.js] constructor");
   }
 
   state = {
     persons: [
-      { id: 'asfa1', name: 'Max', age: 28 },
-      { id: 'vasdf1', name: 'Manu', age: 29 },
-      { id: 'asdf11', name: 'Stephanie', age: 26 }
+      { id: "asfa1", name: "Max", age: 28 },
+      { id: "vasdf1", name: "Manu", age: 29 },
+      { id: "asdf11", name: "Stephanie", age: 26 }
     ],
-    otherState: 'some other value',
+    otherState: "some other value",
     showPersons: false
   };
 
   static getDerivedStateFromProps(props, state) {
-    console.log('[App.js] getDerivedStateFromProps', props);
+    console.log("[App.js] getDerivedStateFromProps", props);
     return state;
   }
 
   componentWillMount() {
-    console.log('[App.js] componentWillMount');
+    console.log("[App.js] componentWillMount");
   }
 
   componentDidMount() {
-    console.log('[App.js] componentDidMount');
+    console.log("[App.js] componentDidMount");
   }
 
   nameChangedHandler = (event, id) => {
@@ -65,7 +65,7 @@ class App extends Component {
   };
 
   render() {
-    console.log('[App.js] render');
+    console.log("[App.js] render");
     let persons = null;
 
     if (this.state.showPersons) {

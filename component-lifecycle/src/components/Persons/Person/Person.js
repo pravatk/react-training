@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import classes from "./Person.css";
+import classes from "./Person.module.css";
 
 class Person extends Component {
   shouldComponentUpdate(nextProps, nextState) {
