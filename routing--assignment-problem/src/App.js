@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Courses from "./containers/Courses/Courses";
 import Users from "./containers/Users/Users";
 import { Route } from "react-router";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import "./App.css";
 
 class App extends Component {
@@ -44,10 +44,10 @@ class App extends Component {
               <nav>
                 <ul>
                   <li>
-                    <a href="/courses">Courses</a>
+                    <Link to="courses">Courses</Link>
                   </li>
                   <li>
-                    <a href="/users">Users</a>
+                    <Link to="/users">Users</Link>
                   </li>
                 </ul>
               </nav>
