@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import "./Courses.css";
-import { Link } from "react-router-dom";
 
 class Courses extends Component {
   state = {
@@ -15,7 +14,11 @@ class Courses extends Component {
   clickHandler = (id) => {
     console.log(`Clicked course ${id}`);
     console.log(this.props);
-    this.props.history.push("/course");
+    this.props.history.push(
+      `/courses/course?id=${id}&title=${
+        this.state.courses.filter((el) => el.id === id)[0].title
+      }`
+    );
   };
 
   render() {
@@ -35,9 +38,6 @@ class Courses extends Component {
       </section>
     );
 
-    if (this.state.showCourse) {
-      content = <Link to="/course"></Link>;
-    }
     return (
       <div>
         <h1>Amazing Udemy Courses</h1>
