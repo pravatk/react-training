@@ -14,7 +14,7 @@ class BurgerBuilder extends Component {
     totalPrice: 4,
     purchasable: false,
     purchasing: false,
-    loading: false
+    loading: false,
   };
 
   addedListener = (type, price) => {
@@ -34,15 +34,15 @@ class BurgerBuilder extends Component {
     this.updatePurchasable(newState);
   };
 
-  updatePurchasable = newState => {
+  updatePurchasable = (newState) => {
     const ingredients = newState.ingredients;
     const canPurchase =
       Object.keys(ingredients)
-        .map(key => ingredients[key])
+        .map((key) => ingredients[key])
         .reduce((sum, el) => sum + el, 0) > 0;
     console.log(`Can Purchase: ${canPurchase}`);
     this.setState({
-      purchasable: canPurchase
+      purchasable: canPurchase,
     });
   };
 
@@ -51,44 +51,25 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    this.setState({ loading: true });
-    axios
-      .post("/orders.json", {
-        ingredients: this.state.ingredients,
-        price: this.state.totalPrice,
-        customer: {
-          name: "Pravat",
-          email: "someone@test.com",
-          address: {
-            pin: 73779,
-            city: "Bangalore"
-          }
-        }
-      })
-      .then(
-        response => {
-          console.log(response.data);
-          this.setState({
-            loading: false,
-            purchasing: false
-          });
-        },
-        error => {
-          console.log(error);
-          this.setState({
-            loading: false,
-            purchasing: false
-          });
-        }
+    console.log(this.props);
+    const queryParams = [];
+    for (let key in this.state.ingredients) {
+      queryParams.push(
+        `${encodeURIComponent(key)}=${encodeURIComponent(
+          this.state.ingredients[key]
+        )}`
       );
+    }
+    queryParams.push(`totalPrice=${this.state.totalPrice}`);
+    this.props.history.push(`/checkout?${queryParams.join("&")}`);
   };
 
   componentDidMount() {
     axios.get("/ingredients.json").then(
-      response => {
+      (response) => {
         this.setState({ ingredients: response.data, loading: false });
       },
-      error => {
+      (error) => {
         console.log(`[BurgerBuilder] error: ${error}`);
       }
     );
