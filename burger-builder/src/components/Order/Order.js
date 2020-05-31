@@ -5,6 +5,7 @@ const order = (props) => {
   console.log(props);
   const ingredients = Object.keys(props.orderDetails.ingredients).map((key) => (
     <span
+      key={key}
       style={{
         display: "inline-block",
         margin: "0px 5px",
