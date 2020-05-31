@@ -8,13 +8,13 @@ import axios from "../../axios.order";
 import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErorHandling from "../../hoc/withErrorHandling/withErrorHandling";
-import * as actionTypes from "../../store/action";
+import { addIngredient, removeIngredient } from "../../store/actions/index";
+import { initIngredient } from "../../store/actions/ingredients";
 
 class BurgerBuilder extends Component {
   state = {
     purchasable: false,
     purchasing: false,
-    loading: false,
   };
 
   /*
@@ -54,14 +54,7 @@ class BurgerBuilder extends Component {
   };
 
   componentDidMount() {
-    // axios.get("/ingredients.json").then(
-    //   (response) => {
-    //     this.setState({ ingredients: response.data, loading: false });
-    //   },
-    //   (error) => {
-    //     console.log(`[BurgerBuilder] error: ${error}`);
-    //   }
-    // );
+    this.props.onInitIngredient();
   }
 
   render() {
@@ -119,25 +112,19 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ingredients: state.ingredients,
-    totalPrice: state.totalPrice,
+    ingredients: state.burger.ingredients,
+    totalPrice: state.burger.totalPrice,
+    loading: state.burger.loading,
+    error: state.burger.error,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onIngredientAdded: (name, price) =>
-      dispatch({
-        type: actionTypes.ADD_INGREDIENT,
-        ingredientName: name,
-        price: price,
-      }),
+    onIngredientAdded: (name, price) => dispatch(addIngredient(name, price)),
     onIngredientRemoved: (name, price) =>
-      dispatch({
-        type: actionTypes.REMOVE_INGREDIENT,
-        ingredientName: name,
-        price: price,
-      }),
+      dispatch(removeIngredient(name, price)),
+    onInitIngredient: () => dispatch(initIngredient()),
   };
 };
 
