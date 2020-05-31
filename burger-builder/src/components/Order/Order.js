@@ -3,7 +3,6 @@ import classes from "./Order.module.css";
 
 const order = (props) => {
   console.log(props);
-  debugger;
   const ingredients = Object.keys(props.orderDetails.ingredients).map((key) => (
     <span
       style={{

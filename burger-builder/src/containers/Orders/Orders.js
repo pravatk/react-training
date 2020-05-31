@@ -9,6 +9,7 @@ class Orders extends Component {
     orders: {},
     loading: true,
   };
+
   componentDidMount() {
     axios.get("/orders.json").then((resp) => {
       this.setState({
@@ -17,6 +18,7 @@ class Orders extends Component {
       });
     });
   }
+
   render() {
     let orderContent = <Spinner />;
     if (!this.state.loading) {
